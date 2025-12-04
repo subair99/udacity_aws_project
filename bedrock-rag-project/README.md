@@ -142,18 +142,63 @@ For several weeks I was unable to recreate this project until I realised that th
    git clone https://github.com/udacity/cd13926-Building-Generative-AI-Applications-with-Amazon-Bedrock-and-Python-project-solution.git
    ```
 
-9. 
+9. Move all the files to bedrock-rag-project using the move_files.py file and delete the cd13926... folder
+   ```
+   python move_files.py
+   ```
 
+10. Configure AWS CLI with your credentials, last two stay the same
+   ```
+   aws configure
+   ```
 
+11. The required input are shown below
+- AWS Access Key ID: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
+- AWS Secret Access Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
+- Default Region Name: us-west-2
+- Default Output Format: json
 
+12. Get the session token
+   ```
+   eval $(aws sts get-session-token \
+      --serial-number arn:aws:iam::xxxxxxxxxxxx:mfa/virtual-token \  # UPDATE
+      --token-code xxxxxx \  # UPDATE
+      --duration-seconds 28800 \
+      --region us-west-2 \
+      --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)"')
+    ```
 
+13. Check Authentication
+   ```
+   aws sts get-caller-identity
+   ```
 
-2. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
+14. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
+   ```
+   cd stack1
+   ```
 
-3. Initialize Terraform:
+15. Initialize Terraform
    ```
    terraform init
    ```
+
+16. Deploy Terraform
+   ```
+   terraform apply -auto-approve 
+   ```
+- Auto to avaid typing yes all the time
+
+17. Error 1 - Deprecated attribute S3
+<p align="center">
+  <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
+</p>
+- Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
+
+
+
+
+
 
 4. Review and modify the Terraform variables in `main.tf` as needed, particularly:
    - AWS region
