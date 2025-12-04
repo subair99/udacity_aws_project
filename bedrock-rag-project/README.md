@@ -102,7 +102,7 @@ For several weeks I was unable to recreate this project until I realised that th
    unzip awscliv2.zip
    sudo ./aws/install
    ```
-
+  
 2. To check the version run
    ```
    aws --version
@@ -121,33 +121,39 @@ For several weeks I was unable to recreate this project until I realised that th
    ```
 
 5. Install venv if it's not already installed, on Ubuntu/Debian
+
    ```
    sudo apt-get install python3-venv
    ```
 
 6. Create a new directory for the project and navigate to it
+
    ```
    mkdir bedrock-rag-project
    cd bedrock-rag-project
    ```
 
 7. Create and activate a virtual environment
+
    ```
    python -m venv venv
    source venv/bin/activate
    ```
 
 8. Clone this repository to the local machine
+
    ```
    git clone https://github.com/udacity/cd13926-Building-Generative-AI-Applications-with-Amazon-Bedrock-and-Python-project-solution.git
    ```
 
 9. Move all the files to bedrock-rag-project using the move_files.py file and delete the cd13926... folder
+
    ```
    python move_files.py
    ```
 
 10. Configure AWS CLI with your credentials, last two stay the same
+
    ```
    aws configure
    ```
@@ -159,6 +165,7 @@ For several weeks I was unable to recreate this project until I realised that th
 - Default Output Format: json
 
 12. Get the session token
+
    ```
    eval $(aws sts get-session-token \
       --serial-number arn:aws:iam::xxxxxxxxxxxx:mfa/virtual-token \  # UPDATE
@@ -166,9 +173,10 @@ For several weeks I was unable to recreate this project until I realised that th
       --duration-seconds 28800 \
       --region us-west-2 \
       --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)"')
-    ```
+   ```
 
 13. Check Authentication
+
    ```
    aws sts get-caller-identity
    ```
