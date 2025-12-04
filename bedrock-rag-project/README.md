@@ -27,9 +27,11 @@ This project consists of several components:
    - Necessary IAM roles and policies
 
 3. A set of SQL queries to prepare the Postgres database for vector storage
+
 4. A Python script for uploading files to an s3 bucket
 
 The goal is to create a Bedrock Knowledge Base that can leverage data stored in an Aurora Serverless database, with the ability to easily upload supporting documents to S3. This will allow us to ask the LLM for information from the documentation.
+
 
 ## Prerequisites
 
@@ -39,6 +41,7 @@ Before you begin, ensure you have the following:
 - Terraform installed (version 0.12 or later)
 - Python 3.10 or later
 - pip (Python package manager)
+
 
 ## Project Structure
 
@@ -60,6 +63,7 @@ project-root/
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   └── outputs.tf
+|   |
 │   └── bedrock_kb/
 │       ├── main.tf
 │       ├── variables.tf
@@ -72,12 +76,77 @@ project-root/
 ├── spec-sheets/
 │   └── machine_files.pdf
 │
-└── README.md
+├── __init__.py
+│
+├── .gitignore
+│
+├── app.py
+│
+├── bedrock_utils.py
+│
+├── README.md
+│
+└── requirements.txt
 ```
+
 
 ## Deployment Steps
 
-1. Clone this repository to your local machine.
+For several weeks I was unable to recreate this project until I realised that the AWS platform has upgraded most of its services leading to several errors during building. These are the steps I took to ensure the project was completed using the original codes provided.
+
+1. Create a Github repository udacity_aws_project, only add the .gitignore and LICENCE, then create codespaces
+
+1. Install the AWS CLI v2
+   ```
+   curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+   unzip awscliv2.zip
+   sudo ./aws/install
+   ```
+
+2. To check the version run
+   ```
+   aws --version
+   ```
+
+3. Remove the awscliv2.zip download
+   ```
+   rm awscliv2.zip
+   ```
+
+4. Install Teraform
+   ```
+   wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+   sudo apt update && sudo apt install terraform
+   ```
+
+5. Install venv if it's not already installed, on Ubuntu/Debian
+   ```
+   sudo apt-get install python3-venv
+   ```
+
+6. Create a new directory for the project and navigate to it
+   ```
+   mkdir bedrock-rag-project
+   cd bedrock-rag-project
+   ```
+
+7. Create and activate a virtual environment
+   ```
+   python -m venv venv
+   source venv/bin/activate
+   ```
+
+8. Clone this repository to the local machine
+   ```
+   git clone https://github.com/udacity/cd13926-Building-Generative-AI-Applications-with-Amazon-Bedrock-and-Python-project-solution.git
+   ```
+
+9. 
+
+
+
+
 
 2. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
 
