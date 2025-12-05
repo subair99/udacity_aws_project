@@ -205,7 +205,7 @@ For several weeks I was unable to recreate this project until I realised that th
    ```
    terraform apply -auto-approve 
    ```
-* -auto-approve to avaid typing yes all the time
+- -auto-approve to avaid typing yes all the time
 <br>
 
 18. Error1 - Deprecated attribute S3
@@ -236,7 +236,7 @@ For several weeks I was unable to recreate this project until I realised that th
 - Change version = "5.0" on line 7 of stack1/main.tf to version = "6.0" and save
 <br>
 
-22. Error 3 - data.aws_region.current[0].name
+22. Error3 - data.aws_region.current[0].name
 <p align="center">
   <img src="./errors/Error3-Creating_RDS_Cluster.jpg">
 </p>
@@ -244,62 +244,132 @@ For several weeks I was unable to recreate this project until I realised that th
 - Change default = "15.4" on line 9 of modules/database/variables.tf to default = "15.12", save and redeploy the infrastructure
 <br>
 
-23. After the Terraform deployment is complete, note the outputs, particularly the Aurora cluster endpoint
-- Below is the arrangment of the original output
-```
-aurora_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-db_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-db_reader_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-private_subnet_ids = [
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-]
-public_subnet_ids = [
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-]
-rds_secret_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-s3_bucket_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-vpc_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+23. After the Terraform deployment is complete, note the outputs, particularly the Aurora cluster endpoint. Below is the structure
+   ```
+   aurora_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   db_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   db_reader_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   private_subnet_ids = [
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   ]
+   public_subnet_ids = [
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   ]
+   rds_secret_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   s3_bucket_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   vpc_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   ```
 <br>
 
-24. Edit stack1/outputs.tf and database/outputs.tf to get the new output arrangment shown below
-```
-aurora = {
-  "arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  "cluster_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  "endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  "reader_endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-  "secret_arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-}
-network = {
-  "private_subnets" = [
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  ]
-  "public_subnets" = [
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-  ]
-  "vpc_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-}
-s3_bucket_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-```
+24. Edit stack1/outputs.tf and database/outputs.tf to get the new output structure shown below
+   ```
+   aurora = {
+   "arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   "cluster_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   "endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   "reader_endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   "secret_arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   }
+   network = {
+   "private_subnets" = [
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   ]
+   "public_subnets" = [
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+   ]
+   "vpc_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   }
+   s3_bucket_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   ```
 <br>
 
 25. Navigate to the scripts directory
-```
+   ```
    - Prepare the Aurora Postgres database. This is done by running the sql queries in the script/ folder. 
    - This can be done through Amazon RDS console and the Query Editor.
-```
+   ```
 <br>
 
+26. Error4 - Creating Bedrock Agent Knowledge Base
+<p align="center">
+  <img src="./errors/Error4-Creating_Bedrock_Agent_Knowledge_Base.jpg">
+</p>
 
+- Edit scripts/aurora_sql.sql
+- Edit stack2/main.tf
+- Edit modules/bedrock_kb/main.tf
+- Edit modules/bedrock_kb/variables.tf
+<br>
+
+27. Run the sql query below to check of the creation was successful 
+   ```
+   SELECT table_schema, table_name FROM information_schema.tables WHERE table_name = 'bedrock_kb';
+   ```
+<br>
+
+28. Navigate to the Stack2 directory, this stack includes Bedrock Knowledgebase 
+   ```
+   cd ../stack2
+   ```
+<br>
+
+29. Initialize Terraform 
+   ```
+   terraform init
+   ```
+<br>
+
+30. If corrections are made use destroy everything 
+   ```
+   terraform destroy -auto-approve
+   ```
+<br>
+
+31. The clean the state 
+   ```
+   rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup && terraform init
+   ```
+<br>
+
+32. Deploy the infrastructure 
+   ```
+   terraform apply -auto-approve
+   ```
+<br>
+
+33. The structure of the output should be as shown below 
+   ```
+   bedrock_knowledge_base_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   bedrock_knowledge_base_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+   ```
+<br>
+
+34. Change directory to bedrock-rag-project 
+   ```
+   cd ../
+   ```
+<br>
+
+35. Install the requirements file 
+   ```
+   pip install --upgrade pip
+   pip install -r requirements.txt
+   ```
+<br>
+
+36. Upload pdf files to S3, place your files in the spec-sheets folder, make sure to update the S3 bucket name in the script before running.
+   ```
+   python scripts/upload_to_s3.py
+   ```
+<br>
 
 
 
@@ -307,9 +377,9 @@ s3_bucket_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 
 24. Edit 
-```
-
-```
+   ```
+   ans
+   ```
 <br>
 
 
