@@ -222,7 +222,7 @@ For several weeks I was unable to recreate this project until I realised that th
 
 21. Error2 - Deprecated attribute vpc
 <p align="center">
-  <img src="./errors/Error2-Deprecated_attribute_vpc.jpg">
+  <img src="./bedrock-rag-project/errors/Error2-Deprecated_attribute_vpc.jpg">
 </p>
 
 - Change version = "5.0" on line 7 of stack1/main.tf to version = "6.0" and save
@@ -230,7 +230,7 @@ For several weeks I was unable to recreate this project until I realised that th
 
 22. Error3 - data.aws_region.current[0].name
 <p align="center">
-  <img src="./errors/Error3-Creating_RDS_Cluster.jpg">
+  <img src="./bedrock-rag-project/errors/Error3-Creating_RDS_Cluster.jpg">
 </p>
 
 - Change default = "15.4" on line 9 of modules/database/variables.tf to default = "15.12", save and redeploy the infrastructure
@@ -292,7 +292,7 @@ For several weeks I was unable to recreate this project until I realised that th
 
 26. Error4 - Creating Bedrock Agent Knowledge Base
 <p align="center">
-  <img src="./errors/Error4-Creating_Bedrock_Agent_Knowledge_Base.jpg">
+  <img src="./bedrock-rag-project/errors/Error4-Creating_Bedrock_Agent_Knowledge_Base.jpg">
 </p>
 
 - Edit scripts/aurora_sql.sql
@@ -371,5 +371,5 @@ For several weeks I was unable to recreate this project until I realised that th
 
 38. The result of the chat is shown below
 <p align="center">
-  <img src="./Screenshots/Submission7-Code_snippet_of_the_implemented_function_for_query_knowledge_base.jpg">
+  <img src="./bedrock-rag-project/Screenshots/Submission7-Code_snippet_of_the_implemented_function_for_query_knowledge_base.jpg">
 </p>
