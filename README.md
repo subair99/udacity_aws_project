@@ -202,7 +202,7 @@ For several weeks I was unable to recreate this project until I realised that th
 
 18. Error1 - Deprecated attribute S3
 <p align="center">
-  <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
+  <img src="./bedrock-rag-project/errors/Error1-Deprecated_attribute_S3.jpg">
 </p>
 
 - Change version = "3.0" on line 51 of stack1/main.tf to version = "5.0" and save
