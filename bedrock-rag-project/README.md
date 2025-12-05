@@ -229,10 +229,10 @@ For several weeks I was unable to recreate this project until I realised that th
 
 21. Error2 - Deprecated attribute vpc
 <p align="center">
-  <img src="./Error2-Deprecated_attribute_vpc.jpg">
+  <img src="./errors/Error2-Deprecated_attribute_vpc.jpg">
 </p>
 * Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
-
+<br>
 
 
 
