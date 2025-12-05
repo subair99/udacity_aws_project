@@ -1,19 +1,15 @@
 # AWS Bedrock Knowledge Base with Aurora Serverless
-
 This project sets up an AWS Bedrock Knowledge Base integrated with an Aurora Serverless PostgreSQL database. It also includes scripts for database setup and file upload to S3.
 
-## Table of Contents
 
+## Table of Contents
 1. [Project Overview](#project-overview)
 2. [Prerequisites](#prerequisites)
 3. [Project Structure](#project-structure)
 4. [Deployment Steps](#deployment-steps)
-5. [Using the Scripts](#using-the-scripts)
-6. [Customization](#customization)
-7. [Troubleshooting](#troubleshooting)
+
 
 ## Project Overview
-
 This project consists of several components:
 
 1. Stack 1 - Terraform configuration for creating:
@@ -34,9 +30,7 @@ The goal is to create a Bedrock Knowledge Base that can leverage data stored in 
 
 
 ## Prerequisites
-
 Before you begin, ensure you have the following:
-
 - AWS CLI installed and configured with appropriate credentials
 - Terraform installed (version 0.12 or later)
 - Python 3.10 or later
@@ -44,7 +38,6 @@ Before you begin, ensure you have the following:
 
 
 ## Project Structure
-
 ```
 project-root/
 │
@@ -91,7 +84,6 @@ project-root/
 
 
 ## Deployment Steps
-
 For several weeks I was unable to recreate this project until I realised that the AWS platform has upgraded most of its services leading to several errors during building. These are the steps I took to ensure the project was completed using the original codes provided.
 
 1. Create a Github repository udacity_aws_project, only add the .gitignore and LICENCE, then create codespaces
