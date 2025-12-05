@@ -233,8 +233,85 @@ For several weeks I was unable to recreate this project until I realised that th
   <img src="./errors/Error2-Deprecated_attribute_vpc.jpg">
 </p>
 
-- Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
+- Change version = "5.0" on line 7 of stack1/main.tf to version = "6.0" and save
 <br>
+
+22. Error 3 - data.aws_region.current[0].name
+<p align="center">
+  <img src="./errors/Error3-Creating_RDS_Cluster.jpg">
+</p>
+
+- Change default = "15.4" on line 9 of modules/database/variables.tf to default = "15.12", save and redeploy the infrastructure
+<br>
+
+23. After the Terraform deployment is complete, note the outputs, particularly the Aurora cluster endpoint
+- Below is the arrangment of the original output
+```
+aurora_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+db_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+db_reader_endpoint = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+private_subnet_ids = [
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]
+public_subnet_ids = [
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+]
+rds_secret_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+s3_bucket_name = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+vpc_id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+<br>
+
+24. Edit stack1/outputs.tf and database/outputs.tf to get the new output arrangment shown below
+```
+aurora = {
+  "arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "cluster_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "reader_endpoint" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  "secret_arn" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+network = {
+  "private_subnets" = [
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  ]
+  "public_subnets" = [
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "subnet-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  ]
+  "vpc_id" = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
+s3_bucket_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+```
+<br>
+
+25. Edit stack1/outputs.tf and database/outputs.tf to get the new output arrangment shown below
+```
+
+```
+<br>
+
+
+
+
+
+
+
+
+24. Edit 
+```
+
+```
+<br>
+
+
 
 
 
