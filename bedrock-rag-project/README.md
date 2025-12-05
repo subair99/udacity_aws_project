@@ -367,3 +367,9 @@ For several weeks I was unable to recreate this project until I realised that th
    ```
    chat_with_kb.py kb_id
    ```
+<br>
+
+38. The result of the chat is shown below
+<p align="center">
+  <img src="./Screenshots/Submission7-Code_snippet_of_the_implemented_function_for_query_knowledge_base.jpg">
+</p>
