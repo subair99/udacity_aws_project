@@ -95,6 +95,7 @@ project-root/
 For several weeks I was unable to recreate this project until I realised that the AWS platform has upgraded most of its services leading to several errors during building. These are the steps I took to ensure the project was completed using the original codes provided.
 
 1. Create a Github repository udacity_aws_project, only add the .gitignore and LICENCE, then create codespaces
+<br>
 
 2. Install the AWS CLI v2
    ```
@@ -102,16 +103,19 @@ For several weeks I was unable to recreate this project until I realised that th
    unzip awscliv2.zip
    sudo ./aws/install
    ```
-  
+  <br>
+
 3. To check the version run
    ```
    aws --version
    ```
+<br>
 
 4. Remove the awscliv2.zip download
    ```
    rm awscliv2.zip
    ```
+<br>
 
 5. Install Teraform
    ```
@@ -119,6 +123,7 @@ For several weeks I was unable to recreate this project until I realised that th
    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
    sudo apt update && sudo apt install terraform
    ```
+<br>
 
 6. Install venv if it's not already installed, on Ubuntu/Debian
    ```
