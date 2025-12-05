@@ -212,6 +212,7 @@ For several weeks I was unable to recreate this project until I realised that th
 <p align="center">
   <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
 </p>
+
 # Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
 <br>
 
@@ -231,6 +232,7 @@ For several weeks I was unable to recreate this project until I realised that th
 <p align="center">
   <img src="./errors/Error2-Deprecated_attribute_vpc.jpg">
 </p>
+
 # Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
 <br>
 
