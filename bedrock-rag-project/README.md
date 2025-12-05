@@ -129,39 +129,48 @@ For several weeks I was unable to recreate this project until I realised that th
    ```
    sudo apt-get install python3-venv
    ```
+<br>
 
 7. Create a new directory for the project and navigate to it
    ```
    mkdir bedrock-rag-project
    cd bedrock-rag-project
    ```
+<br>
 
 8. Create and activate a virtual environment
    ```
    python -m venv venv
    source venv/bin/activate
    ```
+<br>
 
 9. Clone this repository to the local machine
    ```
    git clone https://github.com/udacity/cd13926-Building-Generative-AI-Applications-with-Amazon-Bedrock-and-Python-project-solution.git
    ```
+<br>
 
 10. Move all the files to bedrock-rag-project using the move_files.py file and delete the cd13926... folder
    ```
    python move_files.py
    ```
+<br>
 
 11. Configure AWS CLI with your credentials, last two stay the same
    ```
    aws configure
    ```
+<br>
 
 12. The required input are shown below
-- AWS Access Key ID: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
-- AWS Secret Access Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
-- Default Region Name: us-west-2
-- Default Output Format: json
+   ```
+   AWS Access Key ID: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
+   AWS Secret Access Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
+   Default Region Name: us-west-2
+   Default Output Format: json
+   ```
+<br>
 
 13. Get the session token
    ```
@@ -172,47 +181,61 @@ For several weeks I was unable to recreate this project until I realised that th
       --region us-west-2 \
       --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)"')
    ```
+<br>
 
 14. Check Authentication
    ```
    aws sts get-caller-identity
    ```
+<br>
 
 15. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
    ```
    cd stack1
    ```
+<br>
 
 16. Initialize Terraform
    ```
    terraform init
    ```
+<br>
 
 17. Deploy Terraform
    ```
    terraform apply -auto-approve 
    ```
-- Auto to avaid typing yes all the time
+* -auto-approve to avaid typing yes all the time
+<br>
 
-18. Error 1 - Deprecated attribute S3
+18. Error1 - Deprecated attribute S3
 <p align="center">
   <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
 </p>
 * Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
+<br>
 
 19. If error is encountered update and use
    ```
    rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup && terraform init 
    ```
+<br>
 
 20. The deploy the infrastructure
    ```
    terraform apply -auto-approve
    ```
+<br>
 
-21. Error 2 - Deprecated attribute vpc
-picture
-- Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
+21. Error2 - Deprecated attribute vpc
+<p align="center">
+  <img src="./Error2-Deprecated_attribute_vpc.jpg">
+</p>
+* Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
+
+
+
+
 
 
 
