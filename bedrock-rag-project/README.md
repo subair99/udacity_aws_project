@@ -96,76 +96,69 @@ For several weeks I was unable to recreate this project until I realised that th
 
 1. Create a Github repository udacity_aws_project, only add the .gitignore and LICENCE, then create codespaces
 
-1. Install the AWS CLI v2
+2. Install the AWS CLI v2
    ```
    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
    unzip awscliv2.zip
    sudo ./aws/install
    ```
   
-2. To check the version run
+3. To check the version run
    ```
    aws --version
    ```
 
-3. Remove the awscliv2.zip download
+4. Remove the awscliv2.zip download
    ```
    rm awscliv2.zip
    ```
 
-4. Install Teraform
+5. Install Teraform
    ```
    wget -O - https://apt.releases.hashicorp.com/gpg | sudo gpg --dearmor -o /usr/share/keyrings/hashicorp-archive-keyring.gpg
    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(grep -oP '(?<=UBUNTU_CODENAME=).*' /etc/os-release || lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
    sudo apt update && sudo apt install terraform
    ```
 
-5. Install venv if it's not already installed, on Ubuntu/Debian
-
+6. Install venv if it's not already installed, on Ubuntu/Debian
    ```
    sudo apt-get install python3-venv
    ```
 
-6. Create a new directory for the project and navigate to it
-
+7. Create a new directory for the project and navigate to it
    ```
    mkdir bedrock-rag-project
    cd bedrock-rag-project
    ```
 
-7. Create and activate a virtual environment
-
+8. Create and activate a virtual environment
    ```
    python -m venv venv
    source venv/bin/activate
    ```
 
-8. Clone this repository to the local machine
-
+9. Clone this repository to the local machine
    ```
    git clone https://github.com/udacity/cd13926-Building-Generative-AI-Applications-with-Amazon-Bedrock-and-Python-project-solution.git
    ```
 
-9. Move all the files to bedrock-rag-project using the move_files.py file and delete the cd13926... folder
-
+10. Move all the files to bedrock-rag-project using the move_files.py file and delete the cd13926... folder
    ```
    python move_files.py
    ```
 
-10. Configure AWS CLI with your credentials, last two stay the same
-
+11. Configure AWS CLI with your credentials, last two stay the same
    ```
    aws configure
    ```
 
-11. The required input are shown below
+12. The required input are shown below
 - AWS Access Key ID: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
 - AWS Secret Access Key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  # UPDATE
 - Default Region Name: us-west-2
 - Default Output Format: json
 
-12. Get the session token
-
+13. Get the session token
    ```
    eval $(aws sts get-session-token \
       --serial-number arn:aws:iam::xxxxxxxxxxxx:mfa/virtual-token \  # UPDATE
@@ -175,33 +168,43 @@ For several weeks I was unable to recreate this project until I realised that th
       --output json | jq -r '.Credentials | "export AWS_ACCESS_KEY_ID=\(.AccessKeyId)\nexport AWS_SECRET_ACCESS_KEY=\(.SecretAccessKey)\nexport AWS_SESSION_TOKEN=\(.SessionToken)"')
    ```
 
-13. Check Authentication
-
+14. Check Authentication
    ```
    aws sts get-caller-identity
    ```
 
-14. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
+15. Navigate to the project Stack 1. This stack includes VPC, Aurora servlerless and S3
    ```
    cd stack1
    ```
 
-15. Initialize Terraform
+16. Initialize Terraform
    ```
    terraform init
    ```
 
-16. Deploy Terraform
+17. Deploy Terraform
    ```
    terraform apply -auto-approve 
    ```
 - Auto to avaid typing yes all the time
 
-17. Error 1 - Deprecated attribute S3
+18. Error 1 - Deprecated attribute S3
+
 <p align="center">
   <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
 </p>
+
 - Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
+
+19. If error is encountered update and use
+   ```
+   rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup && terraform init 
+   ```
+
+
+
+
 
 
 
