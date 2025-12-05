@@ -292,9 +292,10 @@ s3_bucket_arn = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
 <br>
 
-25. Edit stack1/outputs.tf and database/outputs.tf to get the new output arrangment shown below
+25. Navigate to the scripts directory
 ```
-
+   - Prepare the Aurora Postgres database. This is done by running the sql queries in the script/ folder. 
+   - This can be done through Amazon RDS console and the Query Editor.
 ```
 <br>
 
