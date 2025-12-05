@@ -193,16 +193,21 @@ For several weeks I was unable to recreate this project until I realised that th
 <p align="center">
   <img src="./errors/Error1-Deprecated_attribute_S3.jpg">
 </p>
- - Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
+* Change version = "~> 3.0" on line 51 of stack1/main.tf to version = "~> 5.0" and save
 
 19. If error is encountered update and use
    ```
    rm -rf .terraform .terraform.lock.hcl terraform.tfstate terraform.tfstate.backup && terraform init 
    ```
 
+20. The deploy the infrastructure
+   ```
+   terraform apply -auto-approve
+   ```
 
-
-
+21. Error 2 - Deprecated attribute vpc
+picture
+- Change version = "~> 5.0" on line 7 of stack1/main.tf to version = "~> 6.0" and save
 
 
 
